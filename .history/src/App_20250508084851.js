@@ -18,7 +18,7 @@ function App() {
     fetchPokemonData();
   },[])
 
-  const loadPokemon = async (data) =>{ //asyncを書かないと　setPokemonData() に「未解決のPromise」を渡すことになる
+  const loadPokemon = async (data) =>{
     let _pokemonData = await Promise.all( //配列の中身すべての取得が終わるまで待つ
       data.map((pokemon) =>{
         let pokemonRecord = getPokemon(pokemon.url)
