@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { getAllPokemon , getPokemon} from './utils/Pokemon';
-import Card from './components/Card/Card';
+import {Card} from './components/Card/Card'
 function App() {
   const initialURL ="https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState(true);
-  const [pokemonData , setPokemonData] = useState([]);
+  const [pokemonData , setPokemonData] = useState();
   useEffect(() => {
     const fetchPokemonData = async () => {
       //すべてのPokémon
