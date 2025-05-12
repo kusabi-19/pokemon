@@ -8,7 +8,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [pokemonData , setPokemonData] = useState([]);
   const [nextUrl , setNextUrl ] = useState("");
-  const [prevUrl , setprevUrl ] = useState("");
   useEffect(() => {
     const fetchPokemonData = async () => {
       //すべてのPokémon
@@ -16,8 +15,6 @@ function App() {
       //各ポケモンの詳細なデータを取得
       loadPokemon(res.results)
       console.log(res)
-      setNextUrl(res.next)
-      setprevUrl(res.previous)
       setLoading(false);
     };
 
@@ -28,6 +25,7 @@ function App() {
     let _pokemonData = await Promise.all( //配列の中身すべての取得が終わるまで待つ
       data.map((pokemon) =>{
         let pokemonRecord = getPokemon(pokemon.url)
+
         return pokemonRecord;
       })
     );
@@ -37,21 +35,9 @@ function App() {
   // console.log(pokemonData);
   const handleNextPage = async () => {
     setLoading(true);
-    let data = await getAllPokemon(nextUrl);
-    await loadPokemon(data.results);
-    setNextUrl(data.next);
-    setprevUrl(data.previous);
-    setLoading(false);
+    let data = await getAllPokemon(res.next);
   };
-  const handlePrevPage = async() => {
-    setLoading(true);
-    let data = await getAllPokemon(prevUrl);
-    await loadPokemon(data.results);
-    console.log(data.previous);
-    setNextUrl(data.next);
-    setprevUrl(data.previous);
-    setLoading(false);
-  };
+  const handlePrevPage = () => {};
 
   return (
     <>
@@ -67,9 +53,8 @@ function App() {
               })}
             </div>
             <div className="btn">
-              {}
-              <button onClick={handlePrevPage}>前へ</button>
-              <button onClick={handleNextPage}>次へ</button>
+              <button onClick={handleNextPage}></button>
+              <button onClick={handlePrevPage}></button>
 
             </div>
           </>

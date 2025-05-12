@@ -39,17 +39,15 @@ function App() {
     setLoading(true);
     let data = await getAllPokemon(nextUrl);
     await loadPokemon(data.results);
-    setNextUrl(data.next);
-    setprevUrl(data.previous);
+    setNextUrl(data.next)
     setLoading(false);
   };
   const handlePrevPage = async() => {
     setLoading(true);
     let data = await getAllPokemon(prevUrl);
     await loadPokemon(data.results);
-    console.log(data.previous);
-    setNextUrl(data.next);
-    setprevUrl(data.previous);
+    console.log(data.previous)
+    setprevUrl(data.previous)
     setLoading(false);
   };
 
@@ -67,7 +65,6 @@ function App() {
               })}
             </div>
             <div className="btn">
-              {}
               <button onClick={handlePrevPage}>前へ</button>
               <button onClick={handleNextPage}>次へ</button>
 
